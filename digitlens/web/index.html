@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read handwritten and printed digits and English text from a camera or an image.">
+  <title>DigitLens</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-content">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span>DigitLens</div>
+      <span class="local-indicator"><span class="dot"></span> Local processing</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="intro">
+      <h1>Digit &amp; text scanner</h1>
+      <p>Read handwritten and printed digits or English text from your camera or an image.</p>
+      <fieldset class="scan-modes">
+        <legend>Scan for</legend>
+        <label><input type="radio" name="scan-mode" value="digits" checked><span>Digits</span></label>
+        <label><input type="radio" name="scan-mode" value="text"><span>Printed English</span></label>
+        <label><input type="radio" name="scan-mode" value="handwriting"><span>Handwritten English</span></label>
+      </fieldset>
+    </div>
+
+    <div class="workspace">
+      <section class="panel capture" aria-labelledby="capture-heading">
+        <header class="panel-header">
+          <h2 id="capture-heading">Preview</h2>
+          <span class="source-indicator" id="source-indicator"><span class="dot"></span><span id="source-text">Camera off</span></span>
+        </header>
+
+        <div class="stage" id="stage">
+          <div class="surface" id="surface">
+            <video id="camera" autoplay playsinline muted hidden></video>
+            <img id="still" alt="Uploaded scan image" hidden>
+            <div class="scan-guide" id="scan-guide" aria-hidden="true">
+              <i></i><i></i><i></i><i></i>
+            </div>
+            <div class="boxes" id="boxes" aria-hidden="true"></div>
+          </div>
+          <div class="placeholder" id="placeholder">
+            <span class="camera-icon" aria-hidden="true"></span>
+            <p id="placeholder-text">Camera is off</p>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="button primary" id="start" type="button"><span class="play-icon" aria-hidden="true"></span>Start Camera</button>
+          <button class="button secondary" id="stop" type="button" disabled><span class="stop-icon" aria-hidden="true"></span>Stop Camera</button>
+          <button class="button secondary upload" id="upload" type="button"><span class="upload-icon" aria-hidden="true">↑</span>Upload Image</button>
+          <input id="file" type="file" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" hidden>
+        </div>
+        <p class="notice" id="notice" role="status" hidden></p>
+      </section>
+
+      <aside class="side">
+        <section class="panel result" aria-labelledby="result-heading">
+          <header class="panel-header"><h2 id="result-heading">Scan result</h2></header>
+          <div class="result-body" role="status" aria-atomic="true">
+            <output id="sequence" aria-label="Recognized sequence" aria-live="off" hidden></output>
+            <p class="empty-result" id="empty-result">No digits detected</p>
+            <p class="result-note" id="result-note" hidden></p>
+          </div>
+        </section>
+
+        <section class="panel guide" aria-labelledby="guide-heading">
+          <h2 id="guide-heading">Scanning tips</h2>
+          <ul>
+            <li id="layout-tip">Place one horizontal row inside the scan box.</li>
+            <li id="spacing-tip">Leave a gap between digits and hold the paper steady.</li>
+            <li>Use even lighting and a plain, contrasting background.</li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
